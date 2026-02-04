@@ -2,40 +2,46 @@ package az.edu.ada.modules.module02.lecture04;
 
 public class LibraryApp {
 
-    public void saveBook() {
-        // fetch from db: 1
+	public void saveBook() {
+		// fetch from db: 1
+		// do internal process
+		// save into db: 2
+	}
 
-        // do internal process
+	public static void main(String[] args) {
+		DBConnection connection1 = DBConnection.getInstance();
 
-        // save into db: 2
-    }
+		connection1 = null; //???
 
-    public static void main(String[] args) {
-        DBConnection connection1 = DBConnection.getInstance();
+		System.out.println("Did some work");
 
-        connection1 = null; //???
+		DBConnection connection2 = DBConnection.getInstance();
+		connection2.setSmth(1);
 
-        System.out.println("Did some work");
+		System.out.println("Did more work");
+	}
 
-        DBConnection connection2 = DBConnection.getInstance();
-        connection2.setSmth(1);
+	public class DBConnection {
 
-        System.out.println("Did more work");
-    }
+		private static volatile DBConnection instance;
 
-    public class DBConnection {
+		private DBConnection() {
+			System.out.println("Connected to the DB!");
+		}
 
-        private static final DBConnection INSTANCE = new DBConnection();
+		public static DBConnection getInstance() {
+			if (instance == null) {
+				synchronized (DBConnection.class) {
+					if (instance == null) {
+						instance = new DBConnection();
+					}
+				}
+			}
+			return instance;
+		}
 
-        private DBConnection() {
-            System.out.println("Connected to the DB!");
-        }
-
-        public static DBConnection getInstance() {
-            if (INSTANCE == null) {
-                INSTANCE = new DBConnection();
-            }
-            return INSTANCE;
-        }
-    }
+		public void setSmth(int value) {
+			System.out.println("Setting value: " + value);
+		}
+	}
 }
