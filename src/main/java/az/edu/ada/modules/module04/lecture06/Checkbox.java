@@ -7,13 +7,13 @@ public class Checkbox {
 	public Checkbox() {
 		String os = System.getProperty("os.name").toLowerCase();
 		if (os.contains("win")) {
-			isBordersRounded = false;
+			isBordersRounded = true;
 			System.out.println("Operating system is Windows");
 		} else if (os.contains("mac")) {
-			isBordersRounded = true;
+			isBordersRounded = false;
 			System.out.println("Operating system is macOS");
 		} else {
-			isBordersRounded = true;
+			isBordersRounded = false;
 			System.out.println("Operating system is Unknown");
 		}
 	}
