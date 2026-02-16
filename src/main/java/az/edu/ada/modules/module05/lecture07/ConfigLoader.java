@@ -1,6 +1,8 @@
 package az.edu.ada.modules.module05.lecutre07;
 
-import factory.*;
+import LinuxFactory;
+import MacFactory;
+import WinFactory;
 
 public class ConfigLoader {
 
